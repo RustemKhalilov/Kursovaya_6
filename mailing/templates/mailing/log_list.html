@@ -1,0 +1,28 @@
+{% extends 'mailing/base.html'%}
+{% block content %}
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Попытки рассылок</h1>
+    </div>
+</section>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Рассылка</th>
+        <th scope="col">Время</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Ответ сервера</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for log in object_list %}
+    <tr>
+        <td>{{ log.mailing }}</td>
+        <td>{{ log.time }}</td>
+        <td>{{ log.status }}</td>
+        <td>{{ log.server_response }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

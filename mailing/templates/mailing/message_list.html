@@ -1,0 +1,33 @@
+{% extends 'mailing/base.html'%}
+{% block content %}
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Список сообщений</h1>
+    </div>
+</section>
+<a class="btn btn-outline-primary mb-5" href="{% url 'mailing:create_message' %}">Добавить сообщение</a>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for message in object_list %}
+    <div class="col-3 p-1">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <p class="card-text">Заголовок: {{ message.title }}</p>
+                <p class="card-text">Сообщение: {{ message.message }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        {% if user == user.is_staff %}
+                        <a class="btn btn-primary" href="{% url 'mailing:view_message' message.pk %}" role="button">Просмотр</a>
+                        {% endif %}
+                        {% if user == message.owner or user.is_superuser %}
+                        <a class="btn btn-primary" href="{% url 'mailing:view_message' message.pk %}" role="button">Просмотр</a>
+                        <a class="btn btn-primary" href="{% url 'mailing:edit_message' message.pk%}" role="button">Редактировать</a>
+                        <a class="btn btn-primary" href="{% url 'mailing:delete_message' message.pk%}" role="button">Удалить</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
