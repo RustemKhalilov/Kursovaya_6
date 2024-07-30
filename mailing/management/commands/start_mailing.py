@@ -15,7 +15,7 @@ class Command(BaseCommand):
         current_datetime = datetime.now(zone)
         for mailing in mailings:
             clients = mailing.clients.all()
-            if mailing.end_date and current_datetime >= mailing.end_date:
+            if mailing.next_send_time and current_datetime >= mailing.next_send_time:
                 try:
                     server_response = send_mail(
                         subject=mailing.message.title,
