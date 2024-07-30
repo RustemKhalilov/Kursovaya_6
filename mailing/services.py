@@ -9,7 +9,7 @@ from django.core.mail import send_mail
 from mailing.models import Mailing, Log, Message
 from django.core.cache import cache
 
-from config.settings import CACHE_ENABLED
+from config.settings import CACHE_ENABLE
 
 
 def send_mailing():
@@ -73,7 +73,7 @@ def get_messages_from_cache():
     """
     Получение списка сообщений из кэша. Если кэш пуст,то получение из БД.
     """
-    if not CACHE_ENABLED:
+    if not CACHE_ENABLE:
         return Message.objects.all()
     else:
         key = 'categories_list'
